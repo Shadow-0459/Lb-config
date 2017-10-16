@@ -1,0 +1,15 @@
+{
+  "name": "lbconfig",
+  "version": "2.0.2",
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-bootstrap": "^2.5.0",
+    "angular-ui-router": "^0.4.2",
+    "angular-scroll": "^1.0.0",
+    "angular-messages": "^1.6.3"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.6.3",
+    "angular-scenario": "^1.6.3"
+  }
+}
