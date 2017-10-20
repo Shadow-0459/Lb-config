@@ -1,0 +1,198 @@
+.alert.alert-danger.alert-w-icon(role="alert" ng-if="isInvalidParameter")
+    span.icon-warning.alert-icon(aria-hidden="true")
+    strong Oh error!
+    &#160;
+    span The request parameter is invalid. The app can not generate the Configuration Output automatically. 
+
+.app-block(id="configurations")
+    h2.title Configurations
+    .content
+        form.form-horizontal(name="lbConfigForm" role="form" novalidate)
+            h3.section-title Apache Configuration
+            .form-group
+                label.col-md-4.control-label(for="apacheVersion") Apache Version
+                .col-md-4
+                    select.form-control(name="apacheVersion" ng-model="config.apacheVersion" ng-options="x.value as x.label for x in utility.apacheVersions" ng-change="hide();" required)
+                .col-md-4(ng-messages="lbConfigForm.apacheVersion.$error" ng-if="lbConfigForm.apacheVersion.$dirty && lbConfigForm.apacheVersion.$invalid")
+                    .input-error(ng-message="required") This field is required.
+            .form-group
+                label.col-md-4.control-label(for="apacheServerCount") Servers
+                .col-md-4
+                    input.form-control(name="apacheServerCount" type="text" ng-model="config.apacheServerCount" ng-pattern="/^[1-9]\\d*$/" ng-change="hide();" required)
+                .col-md-4(ng-messages="lbConfigForm.apacheServerCount.$error" ng-if="lbConfigForm.apacheServerCount.$dirty && lbConfigForm.apacheServerCount.$invalid")
+                    .input-error(ng-message="pattern")
+                        span This field must be <strong>Natural Number</strong>.
+                    .input-error(ng-message="required") This field is required.
+            .form-group
+                label.col-md-4.control-label(for="apacheCoresPerServer") Cores Per Server
+                .col-md-4
+                    input.form-control(name="apacheCoresPerServer" type="text" ng-model="config.apacheCoresPerServer" ng-pattern="/^[1-9]\\d*$/" ng-change="hide();" required)
+                .col-md-4(ng-messages="lbConfigForm.apacheCoresPerServer.$error" ng-if="lbConfigForm.apacheCoresPerServer.$dirty && lbConfigForm.apacheCoresPerServer.$invalid")
+                    .input-error(ng-message="pattern")
+                        span This field must be <strong>Natural Number</strong>.
+                    .input-error(ng-message="required") This field is required.
+            .form-group
+                label.col-md-4.control-label(for="apacheMPMType") MPM Type
+                .col-md-4
+                    select.form-control(name="apacheMPMType" ng-model="config.apacheMPMType" ng-options="x for x in utility.apacheMPMTypes" ng-change="hide();" required)
+                .col-md-4(ng-messages="lbConfigForm.apacheMPMType.$error" ng-if="lbConfigForm.apacheMPMType.$dirty && lbConfigForm.apacheMPMType.$invalid")
+                    .input-error(ng-message="required") This field is required.
+            .form-group
+                label.col-md-4.control-label(for="apacheModuleType") Module
+                .col-md-4
+                    select.form-control(name="apacheModuleType" ng-model="config.apacheModuleType" ng-options="x for x in utility.apacheModuleTypes" ng-change="hide();" required)
+                .col-md-4(ng-messages="lbConfigForm.apacheModuleType.$error" ng-if="lbConfigForm.apacheModuleType.$dirty && lbConfigForm.apacheModuleType.$invalid")
+                    .input-error(ng-message="required") This field is required.
+            .form-group(ng-if="config.apacheModuleType === 'mod_cluster'")
+                label.col-md-4.control-label(for="apacheDiscoveryType") Discovery Type
+                .col-md-4
+                    select.form-control(name="apacheDiscoveryType" ng-model="config.apacheDiscoveryType" ng-options="x.value as x.label for x in utility.apacheDiscoveryTypes" ng-change="hide();" required)
+                .col-md-4(ng-messages="lbConfigForm.apacheDiscoveryType.$error" ng-if="lbConfigForm.apacheDiscoveryType.$dirty && lbConfigForm.apacheDiscoveryType.$invalid")
+                    .input-error(ng-message="required") This field is required.
+
+            h3.section-title Backend Configuration
+            .form-group
+                label.col-md-4.control-label(for="beckendVersion") Version
+                .col-md-4
+                    select.form-control(name="beckendVersion" ng-model="config.beckendVersion" ng-options="x.value as x.label for x in utility.beckendVersions" ng-change="hide();" required)
+                .col-md-4(ng-messages="lbConfigForm.beckendVersion.$error" ng-if="lbConfigForm.beckendVersion.$dirty && lbConfigForm.beckendVersion.$invalid")
+                    .input-error(ng-message="required") This field is required.
+            .form-group
+                label.col-md-4.control-label(for="beckendServerCount") Servers
+                .col-md-4
+                    input.form-control(name="beckendServerCount" type="text" ng-model="config.beckendServerCount" ng-pattern="/^[1-9]\\d*$/" ng-change="hide();" required)
+                .col-md-4(ng-messages="lbConfigForm.beckendServerCount.$error" ng-if="lbConfigForm.beckendServerCount.$dirty && lbConfigForm.beckendServerCount.$invalid")
+                    .input-error(ng-message="pattern")
+                        span This field must be <strong>Natural Number</strong>.
+                    .input-error(ng-message="required") This field is required.
+            .form-group
+                label.col-md-4.control-label(for="beckendCoresPerServer") Cores Per Server
+                .col-md-4
+                    input.form-control(name="beckendCoresPerServer" type="text" ng-model="config.beckendCoresPerServer" ng-pattern="/^[1-9]\\d*$/" ng-change="hide();" required)
+                .col-md-4(ng-messages="lbConfigForm.beckendCoresPerServer.$error" ng-if="lbConfigForm.beckendCoresPerServer.$dirty && lbConfigForm.beckendCoresPerServer.$invalid")
+                    .input-error(ng-message="pattern")
+                        span This field must be <strong>Natural Number</strong>.
+                    .input-error(ng-message="required") This field is required.
+            .form-group
+                label.col-md-4.control-label(for="beckendJVMsPerServer") JVMs Per Server
+                .col-md-4
+                    input.form-control(name="beckendJVMsPerServer" type="text" ng-model="config.beckendJVMsPerServer" ng-pattern="/^[1-9]\\d*$/" ng-change="hide();" required)
+                .col-md-4(ng-messages="lbConfigForm.beckendJVMsPerServer.$error" ng-if="lbConfigForm.beckendJVMsPerServer.$dirty && lbConfigForm.beckendJVMsPerServer.$invalid")
+                    .input-error(ng-message="pattern")
+                        span This field must be <strong>Natural Number</strong>.
+                    .input-error(ng-message="required") This field is required.
+        
+            h3.section-title Environment
+            .form-group
+                .col-md-6.col-md-offset-4
+                    .checkbox
+                        label
+                            input(type="checkbox" ng-model="config.isFirewall" ng-change="hide();")
+                            | &#160; There is a firewall between Apache and JBoss.
+            .form-group
+                .col-md-6.col-md-offset-4
+                    .checkbox
+                        label
+                            input(type="checkbox" ng-model="config.isSameServer" ng-change="hide();")
+                            | &#160; Apache and JBoss are on the same server.
+            .form-group
+                .col-md-6.col-md-offset-4
+                    .checkbox
+                        label
+                            input(type="checkbox" ng-model="config.isLongRunning" ng-change="hide();")
+                            | &#160; The server handles long running requests.
+            .form-group(ng-if="config.isLongRunning === true")
+                label.col-md-4.control-label(for="longRunningNum") Time in Seconds of Longest Request
+                .col-md-4
+                    input.form-control(name="longRunningNum" type="text" ng-model="config.longRunningNum" ng-pattern="/^\\d+$/" ng-change="hide();" required)
+                .col-md-4(ng-messages="lbConfigForm.longRunningNum.$error" ng-if="lbConfigForm.longRunningNum.$dirty && lbConfigForm.longRunningNum.$invalid")
+                    .input-error(ng-message="pattern")
+                        span This field must be <strong>Natural Number</strong>.
+                    .input-error(ng-message="required") This field is required.
+
+            h3.section-title
+            .row
+                .col-xs-12
+                    button.pull-left.btn.btn-default(type="button" ng-click="clear()") Clear
+                    button.pull-right.btn.btn-primary(type="button" ng-click="generate()") Generate
+
+div(id="warnings")
+    .app-block(ng-if="isShowWarnings")
+        h2.title Notices
+        .content
+            .row(ng-repeat="warning in stash.warnings" class="messages {{warning.sev}}")
+                .col-xs-12
+                    span(class="{{warning.icon_class}}" aria-hidden="true")
+                    &#160;
+                    {{warning.text | to_trusted}}
+
+div(id="configurationOutput")
+    .app-block(ng-if="isShowConfigurationOutput")
+        h2.title Configuration Output
+        .content
+            h3.section-title Apache
+            p The MaxClients is optimal at 200 * the count of CPU cores for the prefork mpm and 300 * the count of CPU cores for the worker mpm.
+            ul
+                li
+                    h6 MPM Module Configuration
+                    pre.code-block.code-terminal
+                        code.language-apacheconf(ng-bind-html="stash.apache_mpm_conf | to_trusted")
+
+                li
+                    h6 httpd.conf/{{config.apacheModuleType}} configuration
+                    p(ng-if="config.apacheModuleType === 'mod_proxy'") JWS ships with mod_cluster enabled by default; when using mod_proxy you will be required to explicitly disable mod_proxy_cluster and enable mod_proxy_balancer for this configuration to work. Check your httpd.conf for the LoadModule statements that you'll need to modify.
+                    pre.code-block.code-terminal
+                        code.language-apacheconf(ng-bind-html="stash.apache_httpd_conf | to_trusted")
+
+                li(ng-if="config.apacheModuleType === 'mod_jk'")
+                    h6 mod_jk workers.properties
+                    p Given the ThreadsPerChild of <strong>{{stash.apache_threads_per_child_worker}}</strong> and the <strong>MaxClients ({{stash.apache_max_clients}}) / ThreadsPerChild ({{stash.apache_threads_per_child_worker}}) = Processes ({{stash.apache_max_clients / stash.apache_threads_per_child_worker}})</strong> and with <strong>{{stash.apache_total_instances}}</strong> Apache instance(s) the connection_pool_size has been best determined to be <strong>{{stash.apache_poolsize | round}}</strong>.
+                    div(ng-if="stash.apache_total_threads >= stash.jboss_total_threads")
+                        p Take the maxThreads of <strong>{{stash.jboss_threads_per_instance}}</strong> / <strong>{{stash.apache_max_clients / stash.apache_threads_per_child_worker}}</strong> Apache server processes to get the initial connection_pool_size of <strong>{{(stash.apache_total_instances * stash.apache_poolsize) | round}}</strong> then / this number by the number of Apache instances <strong>{{stash.apache_total_instances}}</strong> to arrive at the correct connection_pool_size of <strong>{{stash.apache_poolsize | round}}</strong>.
+                    pre.code-block.code-terminal
+                        code.language-apacheconf(ng-bind-html="stash.apache_modjk_workers_conf | to_trusted")
+
+                li(ng-if="config.apacheModuleType === 'mod_jk'")
+                    h6 mod_jk uriworkermap.properties
+                    pre.code-block.code-terminal
+                        code.language-apacheconf(ng-bind-html="stash.apache_modjk_uriworkermap_conf | to_trusted")
+
+        
+            h3.section-title(ng-if="config.beckendVersion !== 'tc'") JBoss
+            h3.section-title(ng-if="config.beckendVersion === 'tc'") Apache Tomcat
+            ul
+                li
+                    h6 AJP Connector Configuration Output
+                    pre.code-block.code-terminal
+                        code.language-xml(ng-bind-html="stash.jboss_ajp_conf | to_trusted")
+
+                li(ng-if="config.apacheModuleType === 'mod_cluster' && (config.beckendVersion === 6 || config.beckendVersion === 7)")
+                    h6 EAP 6+ mod_cluster Notes
+                    p In EAP 6 and later versions the mod_cluster configuration has been simplified.<br/> You can simply use one of the HA profiles (ha or full-ha), <strong>or</strong> you can add the modcluster subsystem (shown below) to one of the other profiles.
+                    pre.code-block.code-terminal
+                        code.language-xml(ng-bind-html="stash.jboss_profile_xml_conf | to_trusted")
+
+                li(ng-if="config.apacheModuleType === 'mod_cluster' && config.beckendVersion !== 6 && config.beckendVersion !== 7 && config.beckendVersion !== 'tc'")
+                    h6 Add the following to the top of $JBOSS_HOME/server/$PROFILE/deploy/jbossweb.sar/server.xml with the other Listeners
+                    pre.code-block.code-terminal
+                        code.language-xml(ng-bind-html="stash.jboss_server_xml_conf | to_trusted")
+
+                li(ng-if="config.apacheModuleType === 'mod_cluster' && config.beckendVersion !== 6 && config.beckendVersion !== 7 && config.beckendVersion !== 'tc'")
+                    h6 Configuration of jboss-beans.xml
+                    p To ensure that the delegate bean exists before the JBoss Web service starts, and that the bean does not get destroyed until the service shuts down, we must add an explicit microcontainer dependency to the JBoss Web service. To do this, update the WebServer bean contained in $JBOSS_HOME/server/$PROFILE/deploy/jbossweb.sar/META-INF/jboss-beans.xml and add the below depends next to the other depends elements.
+                    pre.code-block.code-terminal
+                        code.language-xml(ng-bind-html="stash.jboss_beans_xml_conf | to_trusted")
+
+                li(ng-if="config.apacheModuleType === 'mod_cluster' && config.beckendVersion !== 6 && config.beckendVersion !== 7 && config.beckendVersion === 'tc'")
+                    h6 Add the following to the top of $TOMCAT_HOME/conf/server.xml with the other Listeners
+                    pre.code-block.code-terminal
+                        code.language-xml(ng-bind-html="stash.jboss_server_xml_conf | to_trusted")
+
+                li(ng-if="config.apacheModuleType === 'mod_cluster' && config.apacheDiscoveryType === 'proxy' && config.beckendVersion !== 'tc'")
+                    h6 Command Line Options
+                    p Since advertise is turned off, thus no multicast, when starting JBoss add the following so that JBoss connects to the Apache proxy
+                    pre.code-block.code-terminal
+                        code.language-bash -Djboss.modcluster.proxyList=127.0.0.1:6666
+                    p This will need to be modified depending on your virtual host IP:PORT; here we are assuming that it is running on localhost. If you are connecting to more than one Apache instance use a comma separated list.
+                    div(ng-if="config.beckendVersion < 6")
+                        p Additionally you may need to change &lt;property name="advertise"&gt;<b>true</b>&lt;/property&gt; to <b>false</b> in $JBOSS_HOME/server/$PROFILE/deploy/mod-cluster.sar/META-INF/mod-cluster-jboss-beans.xml under the specific &lt;bean...&gt; being used
