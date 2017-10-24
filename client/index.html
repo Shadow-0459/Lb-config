@@ -1,0 +1,85 @@
+<!doctype html>
+<html class="bootstrap3 legacyfalse chrometwo">
+    <head>
+        <link href="/chrome_themes/nimbus/css/chrometwo.css" rel="stylesheet" />
+        <script type="text/javascript" src="/webassets/avalon/j/lib/require.js"></script>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <base href="/labs/lbconfig/">
+        <title>Load Balancer Configuration Tool</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- @if DEBUG -->
+        <script>
+            window.LABS_DEBUG = true;
+            window.deps = [];
+            <!-- build:js(client) app/vendor.js -->
+                <!-- bower:js -->
+                /*<script src="bower_components/angular/angular.js"/>*/
+        window.deps.push("bower_components/angular/angular");
+                /*<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"/>*/
+        window.deps.push("bower_components/angular-bootstrap/ui-bootstrap-tpls");
+                /*<script src="bower_components/angular-ui-router/release/angular-ui-router.js"/>*/
+        window.deps.push("bower_components/angular-ui-router/release/angular-ui-router");
+                /*<script src="bower_components/angular-scroll/angular-scroll.js"/>*/
+        window.deps.push("bower_components/angular-scroll/angular-scroll");
+                /*<script src="bower_components/angular-messages/angular-messages.js"/>*/
+        window.deps.push("bower_components/angular-messages/angular-messages");
+                <!-- endbower -->
+            <!-- endbuild -->
+
+            <!-- build:js({.tmp,client}) app/app.js -->
+                /*<script src="app/app.js"/>*/
+                window.deps.push('app/app')
+                <!-- injector:js -->
+                /*<script src="app/main/main.controller.js"/>*/
+        window.deps.push("app/main/main.controller");
+                /*<script src="app/main/main.js"/>*/
+        window.deps.push("app/main/main");
+                /*<script src="app/services/generatorService.js"/>*/
+        window.deps.push("app/services/generatorService");
+                /*<script src="app/services/utilityService.js"/>*/
+        window.deps.push("app/services/utilityService");
+                /*<script src="components/prism/prism.js"/>*/
+        window.deps.push("components/prism/prism");
+                <!-- endinjector -->
+            <!-- endbuild -->
+        </script>
+        <!-- @endif -->
+        <!-- build:js(client) app/loader.js -->
+            <script type="text/javascript" src="loader.js"></script>
+        <!-- endbuild -->
+        <!-- build:css(client) app/vendor.css -->
+            <!-- bower:css -->
+            <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css({.tmp,client}) app/app.css -->
+            <link rel="stylesheet" href="app/app.css">
+            <!-- injector:css -->
+            <!-- endinjector -->
+        <!-- endbuild -->
+        <link rel="stylesheet" href="assets/css/prism.css" />
+    </head>
+    <body>
+        <div id="chrometwo">
+            <div id="chromed-app-content" class="container">
+                <div id="lbconfig" style="display: none;">
+                    <h1 class="title" id="page-title">
+                        Load Balancer Configuration Tool
+                    </h1>
+                    <p>
+                        This tool is designed to help create an optimal balance between apache-based load balancers and JBoss/Tomcat application servers. Input information about your current or planned deployment to generate a configuration files and advice about how you can increase your environment's performance.
+                    </p>
+                    <div ui-view=""></div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            window.breadcrumbs = [
+                ['Labs', '/labs/'],
+                ['Load Balancer Configuration Tool','/labs/lbconfig/']
+            ];
+        </script>
+    </body>
+</html>
